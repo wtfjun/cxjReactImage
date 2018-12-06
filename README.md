@@ -14,7 +14,7 @@
 
 以及一些小的功能点比如：键盘左右切换、移动时增加透明度等一些细节的优化
 
-不多bb了吧，直接上demo [传送门](https://wtfjun.github.io/reactImageDemo/build/)
+不多bb了吧，直接上demo, 自己上来动 [传送门](https://wtfjun.github.io/reactImageDemo/build/)
 
 下面我会写一下一些功能的实现
 
