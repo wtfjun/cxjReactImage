@@ -1,3 +1,5 @@
+#### 序：
+
 整理了一下开发的一个React影像组件
 
 由于一些（乱七八糟）的需求，导致之前的组件影像代码冗余，不可维护
@@ -15,6 +17,8 @@
 不多bb了吧，直接上demo [传送门](https://wtfjun.github.io/reactImageDemo/build/)
 
 下面我会写一下一些功能的实现
+
+<hr />
 
 #### 拖拽：
 
@@ -49,6 +53,7 @@ imageModalMaxzIndex = localStorage.getItem('imageModalMaxzIndex');
       localStorage.setItem('imageModalMaxzIndex', dv.style.zIndex);
     }
 ```
+<hr />
 
 #### 水印
 
@@ -91,6 +96,8 @@ imageModalMaxzIndex = localStorage.getItem('imageModalMaxzIndex');
 
 这里有一篇文章总结了几种前端水印的方案，推荐给大家 [文章](https://juejin.im/post/5b61a273e51d45349e11aba8)
 
+<hr />
+
 #### 缩放
 
 缩放的话，监听鼠标滚动事件
@@ -109,6 +116,8 @@ imageModalMaxzIndex = localStorage.getItem('imageModalMaxzIndex');
     return;
   }
 ```
+
+<hr />
 
 #### 切换
 
@@ -130,6 +139,7 @@ imageModalMaxzIndex = localStorage.getItem('imageModalMaxzIndex');
   }
 ```
 
+<hr />
 
 #### 关于组件的使用
 
