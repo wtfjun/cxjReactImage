@@ -6,6 +6,10 @@ class App extends Component {
     return (
       <div className="App">
         <Container />
+        github地址：
+        <a href="https://wtfjun.github.io/reactImageDemo">
+          https://wtfjun.github.io/reactImageDemo
+        </a>
       </div>
     );
   }
