@@ -137,10 +137,10 @@ img {
   position: absolute;
   text-align: center;
   top: 0;
-  right: 0;
+  right: 8px;
   z-index: 1000;
   display: block;
-  width: 50px;
+  width: 32px;
   height: 50px;
   font-size: 30px;
   /* line-height: 50px; */
@@ -150,4 +150,24 @@ img {
 
 #close-icon:hover {
   cursor: pointer;
+}
+
+#rotate-right, #rotate-left {
+  width: 19px;
+  position: absolute;
+  right: 44px;
+  top: 8px;
+  z-index: 1000;
+  opacity: .5;
+  cursor: pointer;
+}
+
+#rotate-left {
+  right: 76px;
+  transform: rotate(180deg);
+  top: 4px;
+}
+
+#rotate-right img, #rotate-left img {
+  width: 100%;
 }

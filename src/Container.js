@@ -20,7 +20,8 @@ class Container extends Component {
         'http://image.biaobaiju.com/uploads/20180801/23/1533136618-ARPmGQwjvD.jpg',
         'http://img18.3lian.com/d/file/201712/08/8c2b94d5ec0bf634e3881b4ad5568b57.png',
         'http://img3.duitang.com/uploads/blog/201509/15/20150915125228_ixEts.jpeg',
-        'https://s10.sinaimg.cn/mw690/001whaJHzy7kChbjZRn59&690'
+        'https://s10.sinaimg.cn/mw690/001whaJHzy7kChbjZRn59&690',
+        'https://upload-images.jianshu.io/upload_images/5691297-648aed056c02698f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/542/format/webp'
       ]
     })
   }
