@@ -52,6 +52,10 @@ class ImageModal extends Component {
           className="image-modal" 
           style={{ width: '800px' }}
           onWheel={e => zoom(e, this.refs.imageModal)}
+          onContextMenu={e => {
+            e.preventDefault();
+            +e.button === 2 && closeModal();}
+          }
         >
           <span id="rotate-left" onClick={this.handleRotateLeft}>
             <img src="https://upload-images.jianshu.io/upload_images/5691297-f01bb4b7b31b7a5f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/512/format/webp" alt="" />

@@ -7,8 +7,8 @@ class App extends Component {
       <div className="App">
         <Container />
         github地址：
-        <a href="https://wtfjun.github.io/reactImageDemo">
-          https://wtfjun.github.io/reactImageDemo
+        <a href="https://github.com/wtfjun/reactImageDemo">
+          https://github.com/wtfjun/reactImageDemo
         </a>
       </div>
     );
