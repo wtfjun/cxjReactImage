@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import move from './common/move';
-import zoom from './common/zoom';
-import WaterMark from './common/watermark';
+import move from '../common/move';
+import zoom from '../common/zoom';
+import WaterMark from '../common/watermark';
 class ImageModal extends Component {
   constructor(props) {
     super(props);
