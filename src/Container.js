@@ -73,7 +73,12 @@ class Container extends Component {
           next={() => this.next()}
           prev={() => this.prev()}
           closeModal={() => this.closeImg()}
-          userId="多功能图片组件"
+          option={{
+            move: false,
+            waterMarkText: '多功能图片组件',
+            rotate: false,
+            zoom: false
+          }}
         />
       </div>
     );

@@ -1,6 +1,6 @@
 .image-modal {
   position: fixed;
-  left: 10px;
+  left: 30%;
   top: 40px;
   z-index: 1000;
   height: auto;

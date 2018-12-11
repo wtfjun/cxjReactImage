@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import move from '../common/move';
-import zoom from '../common/zoom';
+import Move from '../common/move';
+import Zoom from '../common/zoom';
 import WaterMark from '../common/watermark';
 class ImageModal extends Component {
   constructor(props) {
@@ -13,19 +13,21 @@ class ImageModal extends Component {
   componentDidUpdate = async prevProps => {
     const {
       visible,
-      userId,
-      src
+      src,
+      option: {
+        move, waterMarkText
+      }
     } = this.props;
     if (visible && !prevProps.visible) {
       let imageModalDom = this.refs.imageModal;
       let imageContentDom = imageModalDom.querySelector('.image-content');
       
       // 注册拖拽
-      move(imageModalDom);
+      move && Move(imageModalDom);
 
       // 画水印 部分图片不画水印，比如聊天图片
-      if (userId) {
-        new WaterMark(imageContentDom, { fillText: userId }).draw();
+      if (waterMarkText) {
+        new WaterMark(imageContentDom, { fillText: waterMarkText }).draw();
       }
     }
 
@@ -43,7 +45,7 @@ class ImageModal extends Component {
   }
 
   render() {
-    let { visible, src, prev, next, closeModal } = this.props;
+    let { visible, src, prev, next, closeModal, option: { rotate, zoom } } = this.props;
     let { imgRotate } = this.state;
     return (
       <div>
@@ -51,18 +53,18 @@ class ImageModal extends Component {
           ref="imageModal" 
           className="image-modal" 
           style={{ width: '800px' }}
-          onWheel={e => zoom(e, this.refs.imageModal)}
+          onWheel={e => zoom && Zoom(e, this.refs.imageModal)}
           onContextMenu={e => {
             e.preventDefault();
             +e.button === 2 && closeModal();}
           }
         >
-          <span id="rotate-left" onClick={this.handleRotateLeft}>
+          {rotate && <span id="rotate-left" onClick={this.handleRotateLeft}>
             <img src="https://upload-images.jianshu.io/upload_images/5691297-f01bb4b7b31b7a5f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/512/format/webp" alt="" />
-          </span>
-          <span id="rotate-right" onClick={this.handleRotateRight}>
+          </span>}
+          {rotate && <span id="rotate-right" onClick={this.handleRotateRight}>
             <img src="https://upload-images.jianshu.io/upload_images/5691297-f01bb4b7b31b7a5f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/512/format/webp" alt="" />
-          </span>
+          </span>}
           <span id="close-icon" onClick={closeModal}>
             <img src="https://upload-images.jianshu.io/upload_images/5691297-79565d2f23ae3b18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/32/format/webp" alt="" />
           </span>

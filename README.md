@@ -153,12 +153,17 @@ imageModalMaxzIndex = localStorage.getItem('imageModalMaxzIndex');
 
 ```
 <ImageModal 
-    visible={modalVisible}
-    src={imageList[currentImageIndex]}
-    next={() => this.next()}
-    prev={() => this.prev()}
-    closeModal={() => this.closeImg()}
-    userId="多功能图片组件"
+  visible={modalVisible}
+  src={imageList[currentImageIndex]}
+  next={() => this.next()}
+  prev={() => this.prev()}
+  closeModal={() => this.closeImg()}
+  option={{
+    move: true,
+    waterMarkText: '多功能图片组件',
+    rotate: true,
+    zoom: true
+  }}
 />
 ```
 
