@@ -74,10 +74,10 @@ class Container extends Component {
           prev={() => this.prev()}
           closeModal={() => this.closeImg()}
           option={{
-            move: false,
+            move: true,
             waterMarkText: '多功能图片组件',
-            rotate: false,
-            zoom: false
+            rotate: true,
+            zoom: true
           }}
         />
       </div>

@@ -18,7 +18,7 @@ const move = (dv) => {
   let isDown = false;
   // 鼠标按下事件
   dv.onmousedown = function(e) {
-    console.log('down');
+    // console.log('down');
     imageModalMaxzIndex = localStorage.getItem('imageModalMaxzIndex');
     if (dv.style.zIndex != imageModalMaxzIndex) {
       dv.style.zIndex = +imageModalMaxzIndex + 1;
