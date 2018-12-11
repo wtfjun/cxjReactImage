@@ -169,3 +169,5 @@ imageModalMaxzIndex = localStorage.getItem('imageModalMaxzIndex');
 
 [github地址](https://github.com/wtfjun/reactImageDemo)
 
+交流请加wx: c13266836563
+
