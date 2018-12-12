@@ -67,8 +67,7 @@ class Container extends Component {
           
         </ul>
 
-        <ImageModal 
-          visible={modalVisible}
+        {modalVisible && <ImageModal 
           src={imageList[currentImageIndex]}
           next={() => this.next()}
           prev={() => this.prev()}
@@ -79,7 +78,7 @@ class Container extends Component {
             rotate: true,
             zoom: true
           }}
-        />
+        />}
       </div>
     );
   }

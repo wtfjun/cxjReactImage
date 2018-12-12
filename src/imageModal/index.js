@@ -10,29 +10,30 @@ class ImageModal extends Component {
     }
   }
 
-  componentDidUpdate = async prevProps => {
+  componentDidMount() {
     const {
-      visible,
-      src,
       option: {
         move, waterMarkText
       }
     } = this.props;
-    if (visible && !prevProps.visible) {
-      let imageModalDom = this.refs.imageModal;
-      let imageContentDom = imageModalDom.querySelector('.image-content');
-      
-      // 注册拖拽
-      move && Move(imageModalDom);
+    let imageModalDom = this.refs.imageModal;
+    let imageContentDom = imageModalDom.querySelector('.image-content');
+    
+    // 注册拖拽
+    move && Move(imageModalDom);
 
-      // 画水印 部分图片不画水印，比如聊天图片
-      if (waterMarkText) {
-        new WaterMark(imageContentDom, { fillText: waterMarkText }).draw();
-      }
+    // 画水印 部分图片不画水印，比如聊天图片
+    if (waterMarkText) {
+      new WaterMark(imageContentDom, { fillText: waterMarkText }).draw();
     }
+  }
 
-    if (src !== prevProps.src) {
-      this.setState({ imgRotate: 0 })
+  componentWillReceiveProps(nextProps) {
+    const {
+      src
+    } = this.props;
+    if (src !== nextProps.src) {
+      this.setState({ imgRotate: 0 });
     }
   }
 
@@ -45,11 +46,11 @@ class ImageModal extends Component {
   }
 
   render() {
-    let { visible, src, prev, next, closeModal, option: { rotate, zoom } } = this.props;
+    let { src, prev, next, closeModal, option: { rotate, zoom } } = this.props;
     let { imgRotate } = this.state;
     return (
       <div>
-        {visible && <div 
+        <div 
           ref="imageModal" 
           className="image-modal" 
           style={{ width: '800px' }}
@@ -73,7 +74,7 @@ class ImageModal extends Component {
           <div className="image-content" ref="imageContent">
             <img src={src} style={{ width: '100%', transform: `rotate(${imgRotate}deg)` }} alt="" />
           </div>
-        </div>}
+        </div>
       </div>
     );
   }
