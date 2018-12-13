@@ -152,8 +152,7 @@ imageModalMaxzIndex = localStorage.getItem('imageModalMaxzIndex');
 调用方法：
 
 ```
-<ImageModal 
-  visible={modalVisible}
+{modalVisible && <ImageModal 
   src={imageList[currentImageIndex]}
   next={() => this.next()}
   prev={() => this.prev()}
@@ -164,7 +163,7 @@ imageModalMaxzIndex = localStorage.getItem('imageModalMaxzIndex');
     rotate: true,
     zoom: true
   }}
-/>
+/>}
 ```
 
 [github地址](https://github.com/wtfjun/reactImageDemo)
