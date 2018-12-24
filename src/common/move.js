@@ -39,7 +39,7 @@ const move = (dv) => {
     dv.style.cursor = 'move';
   };
   // 鼠标移动
-  dv.onmousemove = function(e) {
+  onmousemove = function(e) {
     e.preventDefault();
     if (isDown == false) {
       return;
