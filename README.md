@@ -30,6 +30,12 @@ import ImageModal from 'cxj-react-image';
 
 交流请加wx: c13266836563
 
+<hr />
+<hr />
+<hr />
+
+#### 以下为相关实现讲解
+
 #### 序：
 
 整理了一下开发的一个React影像组件
