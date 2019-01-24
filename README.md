@@ -1,4 +1,4 @@
-usege/用法:
+cxj-react-image 用法如下：
 
 ```
 yarn add cxj-react-image
@@ -19,7 +19,7 @@ import ImageModal from 'cxj-react-image';
     rotate: true,                      {/* 控制旋转 */}
     zoom: true                         {/* 控制放大缩小 */}
   }}
-/>}
+/>
 ```
 
 更详细的用法请参考 ``container.js``文件
@@ -34,62 +34,68 @@ import ImageModal from 'cxj-react-image';
 <hr />
 <hr />
 
-#### 以下为相关实现讲解
+以下为相关实现讲解
 
-#### 序：
+#### 拖拽
 
-整理了一下开发的一个React影像组件
+实现拖拽的思路是计算出dom最后的left跟top。
 
-由于一些（乱七八糟）的需求，导致之前的组件影像代码冗余，不可维护
+未移动前可以通过clientX跟offsetLeft拿到dom的x坐标和左边距，记为``initX和offLeft``。
 
-看不下去了，是时候出来拯救世界了
+移动的过程中可以通过``clientX``拿到元素的x坐标，记为``moveX``。
 
-于是我上场了
+得到公式：``left = moveX - initX + offLeft``。
 
-我做的事，就是将各类功能函数抽离，同时代码尽可能的少
-
-这个组件的主要功能有：拖拽、水印、缩放、切换、旋转（更新中）
-
-以及一些小的功能点比如：键盘左右切换、移动时增加透明度等一些细节的优化
-
-不多bb了吧，直接上demo, 自己上来动 
-
-下面我会写一下一些功能的实现
-
-<hr />
-
-#### 拖拽：
-
-鼠标移动的时候改变modal的位置就可以了
-
-并且要设置一下透明度
-
+核心代码如下：
 ```
-let nx = e.clientX;
-    let ny = e.clientY;
-    // 计算移动后的左偏移量和顶部的偏移量
-    let nl = nx - (x - l);
-    let nt = ny - (y - t);
+const move = (dv) => {
+  // 获取元素
+  let x = 0;
+  let y = 0;
+  let l = 0;
+  let t = 0;
+  let isDown = false;
+  // 鼠标按下事件
+  dv.onmousedown = function(e) {
+    // 获取x坐标和y坐标
+    x = e.clientX;
+    y = e.clientY;
+
+    // 获取左部和顶部的偏移量
+    l = dv.offsetLeft;
+    t = dv.offsetTop;
   
-    dv.style.left = nl + 'px';
-    dv.style.top = nt + 'px';
+    handleMove();
+  };
+  // 鼠标移动
+  // 再包一层是为了方便注册 避免被替换
+  function handleMove() {
+    onmousemove = function(e) { 
+      // 获取x和y
+      let nx = e.clientX;
+      let ny = e.clientY;
 
-    // 设置移动时透明
-    dv.querySelector('.image-content').style.opacity = .3;
+      // 计算移动后的左偏移量和顶部的偏移量
+      let nl = nx - (x - l);
+      let nt = ny - (y - t);
+
+      dv.style.left = nl + 'px';
+      dv.style.top = nt + 'px';
+    };
+  }
+};
 ```
 
-关于这个移动，有个地方要注意
-
-比如我们页面上有两个modal，要保证最后点击的modal要覆盖之前点击的modal
+关于拖拽，有个情况还需要优化：页面上有两个modal，要保证最后点击的modal要覆盖之前点击的modal。
 
 也就是zIndex要控制好，这里用localStorage来保存这个最大的zIndex
 
 ```
 imageModalMaxzIndex = localStorage.getItem('imageModalMaxzIndex');
-    if (dv.style.zIndex != imageModalMaxzIndex) {
-      dv.style.zIndex = +imageModalMaxzIndex + 1;
-      localStorage.setItem('imageModalMaxzIndex', dv.style.zIndex);
-    }
+if (dv.style.zIndex != imageModalMaxzIndex) {
+  dv.style.zIndex = +imageModalMaxzIndex + 1;
+  localStorage.setItem('imageModalMaxzIndex', dv.style.zIndex);
+}
 ```
 <hr />
 
@@ -97,13 +103,49 @@ imageModalMaxzIndex = localStorage.getItem('imageModalMaxzIndex');
 
 前端实现水印，避免私密图片泄露
 
-其实水印有好几种解决方案 dom、canvas、svg等
+思路是使用canvas生成文字图片，然后利用以下的css：
 
-这里用canvas实现
+``background-image:url('${base64Url}');``
 
-思路就是将文本用canvas生成图片，然后将该图片作为背景repeat
+``background-repeat:repeat;``
 
+实现水印类：
 ```
+/**
+ * @overview: 水印组件
+ */
+
+export default class WaterMark {
+  constructor(container, option) {
+    this.container = container;
+    this.option = {
+      width: '200px',
+      height: '150px',
+      opacity: .7,
+      fillStyle: 'rgba(47, 205, 227, 0.3)',
+      font: '20px microsoft yahei',
+      textBaseline: 'middle',
+      textAlign: 'center',
+      fillText: '水印',
+      ...option
+    };
+  }
+    
+  draw() {
+    const { 
+      container, 
+      option: {
+        width,
+        height,
+        opacity,
+        fillStyle,
+        font,
+        textBaseline,
+        textAlign,
+        fillText,
+        scrollHeight
+      } 
+    } = this;
     const canvas = document.createElement('canvas');
     canvas.setAttribute('width', width);
     canvas.setAttribute('height', height);
@@ -128,8 +170,14 @@ imageModalMaxzIndex = localStorage.getItem('imageModalMaxzIndex');
           z-index:1000;
           pointer-events:none;
           background-repeat:repeat;
-          background-image:url('${base64Url}')
-    `);
+          background-image:url('${base64Url}')`);
+  
+    if (typeof container === 'object') {
+      container.style.position = 'relative';
+      container.insertBefore(watermarkDiv, container.firstChild);
+    }
+  }
+}
 ```
 
 这里有一篇文章总结了几种前端水印的方案，推荐给大家 [文章](https://juejin.im/post/5b61a273e51d45349e11aba8)
@@ -138,43 +186,36 @@ imageModalMaxzIndex = localStorage.getItem('imageModalMaxzIndex');
 
 #### 缩放
 
-缩放的话，监听鼠标滚动事件
+缩放的话，监听鼠标滚动事件。向上滚动放大，向下滚动缩小；这里要注意控制最小缩放值。
 
-向上滚动放大，向下滚动缩小这样
+还要注意的是图片在边界的缩放，不然图片可能会移动在屏幕外。
 
-这里要注意控制最小缩放值，不然会比原子还小，很危险的
+需要做的处理是判断左边界跟图片的宽度。
 
-还要注意的是图片在边界的缩放，会突然迷失在宇宙中（移除屏幕，这是可能的）
-
-这里要做的处理是判断左边界跟图片的宽度
-
+代码实现：
 ```
-// 不让modal由于缩小消失在视野中
+// 控制滚轮缩放
+
+const zoom = (onWheelEvent, dom) => {
+  let e = onWheelEvent;
+  let imageModalWidth = parseInt(dom.style.width);
+  let modalLeft = parseInt(dom.style.left);
+      
+  // 计算缩放后的大小 每一次滚轮 100px
+  let calcWidth = imageModalWidth - e.deltaY;                 
+      
+  // 限制最小 width = 400
+  if (calcWidth <= 300) {
+    return;
+  }
+    
+  // 不让modal由于缩小消失在视野中
   if (modalLeft + calcWidth < 50) {
     return;
   }
-```
-
-<hr />
-
-#### 切换
-
-切换其实就是改变imageModal的src
-
-```
-  prev() {
-    const { currentImageIndex } = this.state;
-    if (currentImageIndex > 0) {
-      this.setState({ currentImageIndex: currentImageIndex - 1 });
-    }
-  }
-
-  next() {
-    const { currentImageIndex, imageList } = this.state;
-    if (currentImageIndex < imageList.length - 1) {
-      this.setState({ currentImageIndex: currentImageIndex + 1 });
-    }
-  }
+      
+  dom.style.width = `${calcWidth}px`;
+};
 ```
 
 

@@ -1,11 +1,10 @@
 {
   "name": "cxj-react-image",
-  "version": "1.0.9",
+  "version": "1.0.12",
   "description": "A simple image modal by react.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel src --out-dir lib --source-maps --extensions .es6,.es,.js --copy-files"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "wtfjun",
   "license": "ISC"
