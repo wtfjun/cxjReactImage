@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
-import Move from '../common/move';
-import Zoom from '../common/zoom';
-import WaterMark from '../common/watermark';
+import Move from './common/move';
+import Zoom from './common/zoom';
+import WaterMark from './common/watermark';
+
+import RotateIcon from './images/rotate.png';
+import CloseIcon from './images/close.png';
+
+import './index.css';
 class ImageModal extends Component {
   constructor(props) {
     super(props);
@@ -17,7 +22,7 @@ class ImageModal extends Component {
       }
     } = this.props;
     let imageModalDom = this.refs.imageModal;
-    let imageContentDom = imageModalDom.querySelector('.image-content');
+    let imageContentDom = imageModalDom.querySelector('.cxj-image-content');
     
     // 注册拖拽
     move && Move(imageModalDom);
@@ -52,7 +57,7 @@ class ImageModal extends Component {
       <div>
         <div 
           ref="imageModal" 
-          className="image-modal" 
+          className="cxj-image-modal" 
           style={{ width: '800px' }}
           onWheel={e => zoom && Zoom(e, this.refs.imageModal)}
           onContextMenu={e => {
@@ -60,18 +65,18 @@ class ImageModal extends Component {
             +e.button === 2 && closeModal();}
           }
         >
-          {rotate && <span id="rotate-left" onClick={this.handleRotateLeft}>
-            <img src="https://upload-images.jianshu.io/upload_images/5691297-f01bb4b7b31b7a5f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/512/format/webp" alt="" />
+          {rotate && <span id="cxj-rotate-left" onClick={this.handleRotateLeft}>
+            <img src={RotateIcon} alt="" />
           </span>}
-          {rotate && <span id="rotate-right" onClick={this.handleRotateRight}>
-            <img src="https://upload-images.jianshu.io/upload_images/5691297-f01bb4b7b31b7a5f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/512/format/webp" alt="" />
+          {rotate && <span id="cxj-rotate-right" onClick={this.handleRotateRight}>
+            <img src={RotateIcon} alt="" />
           </span>}
-          <span id="close-icon" onClick={closeModal}>
-            <img src="https://upload-images.jianshu.io/upload_images/5691297-79565d2f23ae3b18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/32/format/webp" alt="" />
+          <span id="cxj-close-icon" onClick={closeModal}>
+            <img src={CloseIcon} alt="" />
           </span>
-          <span id="left-icon" onClick={prev}>&lt;</span>
-          <span id="right-icon" onClick={next}>&gt;</span>
-          <div className="image-content" ref="imageContent">
+          {prev && <span id="cxj-left-icon" onClick={prev}>&lt;</span>}
+          {next && <span id="cxj-right-icon" onClick={next}>&gt;</span>}
+          <div className="cxj-image-content" ref="imageContent">
             <img src={src} style={{ width: '100%', transform: `rotate(${imgRotate}deg)` }} alt="" />
           </div>
         </div>

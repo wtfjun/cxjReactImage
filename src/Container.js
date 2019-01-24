@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+// import ImageModal from 'cxj-react-image';
 import ImageModal from './imageModal';
+
 import './index.css';
 
 class Container extends Component {

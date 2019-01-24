@@ -1,3 +1,35 @@
+usege/用法:
+
+```
+yarn add cxj-react-image
+// npm i cxj-react-image
+```
+
+```
+import ImageModal from 'cxj-react-image';
+
+<ImageModal 
+  src={imageList[currentImageIndex]}  {/* 当前图片路径 */}
+  next={() => this.next()}            {/* 控制下一张 */}
+  prev={() => this.prev()}            {/* 控制上一张 */}
+  closeModal={() => this.closeImg()}  {/* 控制modal打开关闭 */}
+  option={{
+    move: true,                        {/* 控制拖动 */}
+    waterMarkText: '多功能图片组件',    {/* 设置水印文字 */}
+    rotate: true,                      {/* 控制旋转 */}
+    zoom: true                         {/* 控制放大缩小 */}
+  }}
+/>}
+```
+
+更详细的用法请参考 ``container.js``文件
+
+[github地址](https://github.com/wtfjun/reactImageDemo)
+
+[在线例子](https://wtfjun.github.io/reactImageDemo/build/)
+
+交流请加wx: c13266836563
+
 #### 序：
 
 整理了一下开发的一个React影像组件
@@ -14,7 +46,7 @@
 
 以及一些小的功能点比如：键盘左右切换、移动时增加透明度等一些细节的优化
 
-不多bb了吧，直接上demo, 自己上来动 [传送门](https://wtfjun.github.io/reactImageDemo/build/)
+不多bb了吧，直接上demo, 自己上来动 
 
 下面我会写一下一些功能的实现
 
@@ -139,34 +171,5 @@ imageModalMaxzIndex = localStorage.getItem('imageModalMaxzIndex');
   }
 ```
 
-<hr />
 
-#### 关于组件的使用
-
-如果你看得起这个组件，刚好你又有这中神奇的需求，需要这么个影像组件，那以下：
-
-主要的东西就四个，一个common文件夹，一个imageModal.js、一个Container.js、一个index.css
-
-将这四个文件拿出来，自己根据自己的需求改就行
-
-调用方法：
-
-```
-{modalVisible && <ImageModal 
-  src={imageList[currentImageIndex]}
-  next={() => this.next()}
-  prev={() => this.prev()}
-  closeModal={() => this.closeImg()}
-  option={{
-    move: true,
-    waterMarkText: '多功能图片组件',
-    rotate: true,
-    zoom: true
-  }}
-/>}
-```
-
-[github地址](https://github.com/wtfjun/reactImageDemo)
-
-交流请加wx: c13266836563
 
