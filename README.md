@@ -24,7 +24,7 @@ import ImageModal from 'cxj-react-image';
 
 更详细的用法请参考 ``container.js``文件
 
-[github地址](https://github.com/wtfjun/reactImageDemo)
+[github地址](https://github.com/wtfjun/cxjReactImage)
 
 [在线例子](https://wtfjun.github.io/reactImageDemo/build/)
 
