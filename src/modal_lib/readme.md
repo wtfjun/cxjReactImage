@@ -22,9 +22,9 @@ import ImageModal from 'cxj-react-image';
 />
 ```
 
-[github地址](https://github.com/wtfjun/reactImageDemo)
+[github地址](https://github.com/wtfjun/cxjReactImage)
 
-[在线例子](https://wtfjun.github.io/reactImageDemo/build/)
+[在线例子](https://wtfjun.github.io/cxjReactImage/build/)
 
 交流请加wx: c13266836563
 
