@@ -28,6 +28,8 @@ import ImageModal from 'cxj-react-image';
 
 [在线例子](https://wtfjun.github.io/reactImageDemo/build/)
 
+<i>如有帮助，感谢star~~~ 如有问题，欢迎call me~~~</i>
+
 交流请加wx: c13266836563
 
 <hr />
